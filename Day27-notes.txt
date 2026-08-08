@@ -1,0 +1,39 @@
+Kubernetes Day-27 ( 01-05-206 09:18 PM IST )
+-----------------------------------------------------
+
+Deployment Rollout and Rollback
+
+Strategy Types: RollingUpdate & Recreate
+
+RollingUpdateStrategy:
+  max unavailable = 25% (default)
+  max surge = 25% (default)
+  
+Upgrade your image to some higher version :
+-----------------------
+1. edit the manifest file and apply it 
+2. kubectl set image
+3. kubectl edit deploy nginx-deploy
+
+nginx:1.19 ---> 1.20---> 1.21---> 1.22--> 1.23
+
+Deployment StrategyType: RollingUpdate
+
+Max Unavailble: 25%
+   Deployment ensures that only a certain number of Pods are down while they are being updated, by default it ensures that atleast 75% of the desired pods are up ( 25% max unavailable)
+
+Max Surge:
+  Deployment ensures that only certain number of pods are created above the desired number of pods.By default it ensure that atleast 125% of the desired number of pods are up (25% max surge)
+  
+ Services:  Cluster Ip, Nodeport, LoadBalancer, ExternalName
+ 
+ Deployment + services 
+ 
+ 
+ Next session - Recreate , revisionlimit, Node Port
+ 
+ Kubernetes probes - 
+ 
+ services - 3 to 4 sessions
+ 
+ 10AM IST

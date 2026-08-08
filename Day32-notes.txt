@@ -1,0 +1,12 @@
+Kubernetes Day-32 ( 16-05-2026 08:02 PM IST )
+-------------------------------------------------------------
+
+Cluster IP -> Imperative, Declarative(YAML)
+
+nginx-svc - ClusterIP --DNS name - nginx-svc.default.svc.cluster.local
+
+Refer the below link to demonstrate the DNS resolution:
+----------------------------------------------------------------
+https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+
+Next session - NodePort - 1 hour 30 mins

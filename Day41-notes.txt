@@ -1,0 +1,107 @@
+Kubernetes Day-41 ( 07-06-2026 10:13 AM  IST )
+---------------------------------------------------------
+
+.crt, .key ---> Certificate ----> secrets ---> inject --> ingress.yaml
+
+.crt, .key ---> Certificate ----> Hashicorp Vault operator ---> inject --> ingress.yaml
+
+Nginx Ingress controller
+------------------------------
+1. Host based routing 
+2. Path based routing
+3. SSL/TLS Termination 
+
+
+HA-Proxy controller
+Traefik ingress controller
+Kong
+AWS ELB 
+---------------------------------------------------------
+
+Traefik ingress controller
+
+Gateway API Controller
+
+-----------------------------------------
+
+Traefik ingress controller
+--------------------------------
+
+Traefik ingress installation:
+---------------------
+1. Manifests files --> tedious ---> many yaml ----> 
+2. Helm  -----> Kubernetes Package Manager
+
+Namespace --> Traefik
+ServiceAccount
+CLusterRolebinding
+--
+---
+---
+
+
+Installing Helm:
+------------------------
+https://helm.sh/docs/intro/install/
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
+https://traefik.io/
+
+https://doc.traefik.io/traefik/
+
+https://doc.traefik.io/traefik/getting-started/kubernetes/
+
+deploying the traefik through yaml files - Refer to this document
+
+https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
+
+Using helm to install traefik controller:
+----------------------------------
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm install traefik traefik/traefik
+
+root@lke614040-900552-0becb10c0000:~# kubectl get ingressclass
+NAME      CONTROLLER                      PARAMETERS   AGE
+traefik   traefik.io/ingress-controller   <none>       3m36s
+
+root@lke614040-900552-0becb10c0000:~# kubectl get svc
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)                      AGE
+kubernetes   ClusterIP      10.128.0.1      <none>          443/TCP                      67m
+traefik      LoadBalancer   10.128.27.150   172.232.84.68   80:31433/TCP,443:32377/TCP   4m10s
+
+ns-1965.awsdns-53.co.uk
+ns-757.awsdns-30.net
+ns-36.awsdns-04.com
+ns-1217.awsdns-24.org
+
+LoadBalaner ---> Deployment1---> LB
+                Deployment2---> LB ---> layer 4
+				
+Ingress controller ---> 1LB ---> Layer 7 LB
+
+Kubernetes ---> Ingress controller---> Nginx --> f5 
+
+Nginx Ingress controller---> layer7 LB
+
+app1.haseebops.com
+app2.haseebops.com
+
+suketh.mycompany.com
+
+
+Gateway API
+
+
+Traefik ---> Traefik Ingress controller
+
+Kong ---> Kong Ingress controller
+
+Next class -> Gateway API 
+
+Isitio controller ----> Production 
+
+Installation  , example

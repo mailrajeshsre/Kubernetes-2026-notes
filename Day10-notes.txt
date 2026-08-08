@@ -1,0 +1,45 @@
+Kubernetes Day-10 ( 26-03-2026 08:36 PM IST )
+-------------------------------------------------------
+
+Annotations are used by external tools and libraries
+
+CPU and Memory metrics you need to capture from the running 
+
+Promethus as side car container , inside a pod 
+
+prometheus will try to get the information from the main container
+----------------------------------------------
+
+Introduction to POD
+-----------------------
+
+POD is smallest deployable unit in kubernetes.
+
+Each Pod will be provided with the resources like IP-address , storage and Network 
+
+Whenever the user want to run the microservice/application in the k8s cluster, so basically there is kubernetes resource by the name POD , using the POD resource the kubernetes(API Server) will create a new POD.
+
+
+different stages of POD , Different types of PODS
+
+Kubernetes microservice architecture
+
+namespaces, upgrade the kubernetes versions, taint,tolerations 
+
+Services:
+---------------------
+1. Cluster  IP
+2. Node Port
+3. Load Balancers ( Ingress load balancer )
+4. Gateway API
+
+
+Types of POD Controllers:
+-----------------------------------
+1. Replication controller
+2. ReplicaSet
+3. Deployments
+4. DeamonSet
+5. StatefullSet
+
+

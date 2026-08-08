@@ -1,0 +1,94 @@
+kubernetes Day-22 ( 22-04-2026 08:34 AM IST )
+----------------------------------------------------------
+
+Kubernetes services
+
+kubernetes controller for Workloads(Pods)
+
+RoadMap to learn further kubernetes concepts:
+----------------------------------------------------
+
+Pod Usecases:
+---------------------------------------------------------
+My pod requires some service to be up and then it should start
+   Types of Pods:
+       1. init containers
+	   2. sidecar container
+	   3. ephermeral container
+	   4. main container
+
+How to ensure my pods is always running
+  Controller objects
+     1. Replication controller --> deprecated
+	 2. Replica Set
+	 3. Deployments--> will inturn use ReplicaSet,  Zerodown time & Rollback
+	 V1.0 --> V2.0
+	 4. DeamonSet
+	 
+How to run the batch jobs:
+  1. Job
+  2. CronJob
+  
+ 
+ Manifest ---> statically hard code the replicas (10s), later i need more pods dynamically ---> AutoScalers ( Horizontal , Vertical)
+ 
+ 
+Services/Load Balancing Interactions
+  1. Service
+        Cluster-IP
+		Node-Port
+		Load Balancer
+		External Name
+  2. Ingress LB
+  
+Exposing the services to external world
+   Load Balancers
+   Port Forwarding
+   
+Storage solutions:
+  Peristent Volumes
+  Controller:
+     StatefulSet
+	  
+Configuration changes, Passing variables and secrets
+   1. configmaps
+   2. secrets
+   3. vault(Hashicorp, secrets vaults)
+   
+Administrative tasks:
+1. backup
+2. upgrade
+3. Authentication & Authorization ( RBAC )
+
+k8s Networking:
+-----------------
+CNI
+Network Policies
+
+Manifest --> static YAML, I need to enable Dynamic YAML
+1. HELM
+2. Kustomize
+
+Gitops:
+-----------------
+1. ArgoCD
+2. Flux
+
+Troubleshooting - ( Monitoring - Observability)
+-------------------------------------
+1. Promethus & Grafana
+2. ELK (Elastic search)
+3. New Relic
+
+Security
+
+ServiceMesh
+
+
+Next sessions ---> Controller
+
+1. Replication controller --> deprecated
+	 2. Replica Set
+	 3. Deployments
+	 
+	 4 sessions

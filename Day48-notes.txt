@@ -1,0 +1,22 @@
+Kubernetes Day-48 ( 09-07-2026 09:17 AM IST )
+--------------------------------------------------------
+
+Project volumes, emptyDir (Emphermeal volume,temporary volume )
+
+dd if=/dev/zero of=bigfile bs=1M count=300
+
+configMap as Environment Variables
+
+
+kubectl create configmap ---help
+
+Difference between configmap volume  with configmap environment
+
+app=nginx
+env=prod
+
+Next session:
+ ----------
+ secret volume
+ downwardAPI
+ hostpath

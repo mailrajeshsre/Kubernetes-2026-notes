@@ -1,0 +1,23 @@
+Kubernetes Day-17 ( 14-04-2026 08:26 AM IST )
+---------------------------------------------------
+
+continue with namespaces , limitrange  , ResoureQuota
+
+kubectl apply -f ns-2.yaml -n dev
+
+Refer - https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+
+https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
+
+next session:
+---------------------
+limitrange
+ResourceQuota
+kube config
+kubeadm reset
+kubeadm tokens
+
+kuberenter cluster upgrade
+
+Services
+deployment

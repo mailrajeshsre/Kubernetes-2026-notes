@@ -1,0 +1,53 @@
+Kubernetes Day-25 ( 28-04-2026 08:26 AM IST)
+-----------------------------------------------------------
+
+ReplicaSets(rs)
+---------------
+1. RS make sure the specified number of pods (workloads) are running at given point of time in the cluster
+
+2.Deployment controller inturn uses the ReplicaSet object to manage the PODS replicas
+
+3.  apiVersion: apps/v1
+kubectl api-resources | grep -i replicasets
+
+kind: ReplicaSet
+
+4. Deployment controller is always used instead of ReplicaSet
+
+5. RS will use PodTemplate to create the POD with same specification based on replica count(.spec.replicas=1)
+
+6.Make sure the standalone PODS do not match labels with ReplicaSet
+
+7. In order to delete the POD managed under RS, we always delete the RS not the pods
+
+8. Pods controlled by RS can be isolated from the controller by changing the labels ( Troubleshoot or update)
+
+9. Scalein and Scaleout of replicas are done using the command line 
+kubectl scale --replicas=count rs/rs-name
+
+10. RS selector has 2 parameters to define the labels
+   1. matchLabels
+   2. matchExpressions
+
+11. matchExpressions and matchLabels has key , operators and values parameters.
+
+Refer - https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+
+kubernetes reconcillation loops 
+
+kubernetes reconcillation patterns
+
+Pod label selector ( matchExpressions)
+
+cascade
+
+RC - can perform only equibality based label selection on pods where as RS support both equality set and set based operators
+
+RS supports rolling updated which is used in the deployments.
+
+daemonset --> RS--> zero downtime deployments
+
+next sessions - deployments
+
+
+

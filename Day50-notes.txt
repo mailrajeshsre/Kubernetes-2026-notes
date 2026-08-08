@@ -1,0 +1,17 @@
+Kubernetes Day-50 ( 15-07-2026 07:42 AM IST )
+----------------------------------------------------
+
+downwardAPI volume  --> Environment variable , volume
+
+kubectl logs < pod-name>
+
+next session:
+projected volume 
+
+
+Persistent volume : hostpath ---> 
+
+
+lke623460-914631-08409a390000
+
+lke623460-914631-2aacf3e00000

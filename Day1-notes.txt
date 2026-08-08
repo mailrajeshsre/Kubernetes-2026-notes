@@ -1,0 +1,114 @@
+
+Kubernetes Day-1 ( 04-03-2026 08:22 AM IST)
+-----------------------------------------------------------
+
+
+Introduction to Kubernetes:
+-------------------------------------
+
+Docker --> application (java, dotnet, python, php)
+
+container --> app will be running 
+
+container ---> Production grade environment
+
+A single container with the application--> frontend app--> connection---> scale your container
+
+A single machine, where single container --> machine fails , app will not work .
+
+container ---> attached some volume (storage)--> statefull application ---> DB--> db goes down . A new container with the DB is started
+
+
+Orchestration mechanism ---> Address all production issues .. Kubernetes is the solutions .
+
+AWS --> S3 ---> Kubernetes s3 storage
+
+Azure --> Bolob storage ---> kubernetes
+-----------------------------------------------------------------
+
+Short story 
+------------------
+
+-----------------------------------------
+
+Kubernetes is a Production Grade container orchestration tool
+
+History:
+------------------------------------
+
+gmail , youtube ---> Containers---> Linux Kernel ---> containers---> isolated environment ---> run the app into that isolated environment 
+
+cgroups, namespaces
+
+Servers ---> 
+
+
+Google came up with the project as borg and later one more new project started omega (C++) which they use for their internal applications .
+
+Google build one more project based on learning from borg and omega , in Golan and they called it as kubernetes (k8s). 2014
+
+They donated this project to CNCF
+
+GKE --> Google
+
+As of now , the kubernetes is a defacto container orchestration system .
+
+Basic Architecture:
+-----------------------------------------------
+
+Kubernetes is a cluster , which is collection of one more more nodes.
+
+Kubernetes cluster have two types of nodes
+1. Master Nodes --> manage the cluster
+2. Nodes (worker nodes) ---> Run the workloads ( apps)
+
+Kubernetes Master node components
+--------------------------------------
+1. Kube-API server ( API server)
+2. Kube-Scheduler
+3. Kube controller-manager
+4. etcd
+
+
+Kubernetes Node Components
+--------------------------------------
+1. Kubelet
+2. Container Runtime 
+3. Kube-proxy
+
+
+Kubernetes always tries to maintain the desired state .
+
+dummy manifest file (YAML)
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test
+  labels:
+    app: phippy
+spec:
+  containers:
+     - image: phippy:latest
+	   container_ports:
+	     ports:
+		   - 80:80
+		  
+Questions:
+--------
+1. Can i run the container using containerd
+2. Can i run docker image on Podman
+
+
+Next session:
+Kubernetes how it works:
+Kubernetes installation
+
+EKS
+AKS
+GKE
+
+
+
+
+

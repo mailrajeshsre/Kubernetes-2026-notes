@@ -1,0 +1,121 @@
+Kubernetes Day-34 ( 21-05-2026 10:37 AM IST )
+-------------------------------------------------------
+
+Services --> load balancer
+
+External client --> App---> running inside the POD , we have to use the service
+
+ClusterIP--> VIP, DNS Name, It is used when the Frontend client is part of the kubernetes cluster
+
+NodePort : 30000-32767 ---> allocate 1 Port , and this port will be open across all the nodes in the cluster including master node .
+
+Nodes --> IPaddress ---IPaddress:Port
+
+Disadvantage :
+--------------------------------
+Port number ---> have to opened in the Firewall(iptables) , Security groups --> open port number
+
+Service --> Load Balancer
+
+Introduction to LB Service:
+---------------------------------
+1. In order to implement the external Load Balancing, we have to create Service of type: LoadBalancer
+
+2. Workflow ---> External Traffic ---> Load Balancer ---> NodePort (optional)---> Service ClusterIP---> Pods
+
+3. Service LoadBalancer works under Layer 4 balancing as per OSI Model
+Layer-7 --> ALB
+Layer-4 --> NLB
+
+4. When we create a service, declare the type: LoadBalancer under spec 
+.spec.type=LoadBalancer
+
+5. Create the Manifest(YAML) or you can even use imperative mode
+
+kubectl expose deployment <deploy-name> --port=80 --target-port=80 --name=svc_name --type=LoadBalancer --selector=app=nginx
+
+6. While using EKS, AKS, GKE , Rancher, IBM Cloud, Oracle Cloud, Akamai Cloud , it uses the cloud Load Balancer service which intuen redirect the traffic from LB to Backend PODS based on the configuration.
+
+7. In order to disable NodePort creation for LoadBalancer in Production environment --> 
+spec.allocatLoadBalancerNodePort=false
+
+8. If we need to set the internal loadbalancer for service on cloud ,declare the annotations ( for example AWS EKS)
+
+metadata:
+   name: my-service
+   annotations:
+     serivce.beta.kubernetes.ip/aws-load-balancer-internal: "true"
+	 
+
+On-Premises doesn't have the LB service , then we need to use the below serives.
+
+On-Premises:
+---------------------
+  1. MetalLB--> install and do the configuration---> metalLB--> IP --Service
+  2. OpenELB
+  3. PureLB
+  
+Cloud-Provider
+-----------------------------------
+1. AWS NLB
+2. Azure - Azure Load Balancer
+3. GCP Cloud Load Balancing--> GKE--> type: LoadBalancer
+
+Introduction to MetalLB for On-premises k8s cluster
+------------------------------------------------------------
+
+1. Kubernetes doesn't offer network load balancer for Service Object of type LoadBalancer
+
+2. For Bare Metal Cluster, You can access the application by using type NodePort and ExternalIP is not recommended for Production environment
+
+3. So MetalL provide the solutions to implement Layer-4 LB for kubernetes service of type: LoadBalancer
+
+Refer the link to install MetalLB
+
+https://metallb.universe.tf/installation/
+
+https://metallb.universe.tf/configuration/
+
+https://metallb.universe.tf/configuration/#layer-2-configuration
+
+
+After installation of MetalLB:
+----------------------------------------------------
+
+NameSpace: metallb-system
+ 2 components of MetalLB
+
+1.metallb-system/Controller: It will be running as Deployment object in k8s clustser that handles the IP address Assignment
+
+2. metallb-system/speaker: It will be installed as DeamonSet to make sure that service is reachable of protocol type enabled
+
+Requirements:
+------------------------
+1. K8s cluster version > 1.13.0
+2. CNI thats support the MetalLB (Calico, Cilium, Flannel, Waeve-net)
+3. Free IP address pool to be allocated to MetalLB
+ 20 PIP ---> serial Range --> 172.17.0.1 to 172.17.0.10
+
+4. 7946 Port number 
+
+
+Lab for Deploying MetaLB on On-premises cluster
+-------------------------------------------------
+
+There are three supported ways to install MetalLB: using plain Kubernetes manifests, using Kustomize, or using Helm.
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.16.0/config/manifests/metallb-native.yaml
+
+https://github.com/metallb/metallb
+
+kubectl apply -f https://github.com/metallb/metallb/blob/v0.15.0/config/manifests/metallb-native.yaml
+
+
+
+
+   
+   
+
+Next session - continue with Load Balancer + ExternalIP + ExternalName
+
+Headless

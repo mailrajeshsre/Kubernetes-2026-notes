@@ -1,0 +1,84 @@
+Kubernetes Day-9 ( 21-03-2026 05:32 PM IST)
+--------------------------------------------------
+
+Labels/tags ,Selectors,Annotations, Introduction to POD
+
+## Labels:
+-----------------------
+A  Label is a key value pair that can be applied to any kuberneres objects.
+
+Labels are assigned so that the user can query the objects
+
+To add labels in manifest, we always add it under metadata section.
+
+POD
+
+
+100 PODS ---> 10 pods where your javaapp ---> Label  app: javapp:r1
+
+kubectl run nginx1 --image=nginx --port 80---> API Server ---> resource -POD
+
+A default label assigned to newly created pod is run=<pod-name> run=nginx1
+
+run: nginx
+
+All the objects which are created in cluster may be assigned to some namespaces
+
+Kubernetes -- namespace - default
+
+API server ---> all resources ---> REST API's--> Objects --> libraries
+
+POD
+namespace
+service
+controller
+network
+storage 
+kubectl label pod <pod-name> <key>- : Delete the label
+
+Refer - https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+
+services - Load balancer
+
+services ---> selectors
+
+Once labels are applied we can query using selectors
+
+Two types of selectors
+--------
+Equality based selectors - There are 2 major operations equals and not equals-- services
+
+Set based selectors:
+   in
+   notin
+   exists
+   doesnot exists
+   
+Controllers ( Replicat set, Replication controller, Deployments) ---> set based selectors
+
+
+Query using
+------------
+kubectl get pods -l 'env in (qa,prod)'
+
+kubectl get pods -l 'env notin (qa,prod)'
+
+Annotations:
+-------------------------
+labels and annotations are way of adding metdata to kubernetes objects
+
+Labels are identifyable by kubernetes
+
+annotations are non-identifying metadata
+
+
+kubectl annotate pod nginx-1 scrape="true"
+
+Next session:
+-------------------
+Introduction to POD
+POD workflow
+Types of pods
+state of pods
+
+namespaces

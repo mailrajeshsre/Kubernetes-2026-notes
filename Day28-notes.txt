@@ -1,0 +1,28 @@
+Kubernetes Day-28 ( 02-05-2026 11:06 AM IST )
+----------------------------------------------------------
+
+Deployment Rollout and Rollback
+
+Strategy Types: Recreate
+
+
+Accessing the Pod outside the cluster using hostPort:
+------------------------------------------
+
+Normally a Pod in kubernetes can be accessed only inside the cluster
+
+To Access it from outside the cluster, we can use hostPort
+
+hostPort binds a node machine port to a container port
+
+
+
+docker container run --name web1 nginx
+
+docker container run --name web1 -p 8080:80 nginx
+
+
+Next session: 8PM IST
+Kubernetes probes - 1 hour 30 
+
+services

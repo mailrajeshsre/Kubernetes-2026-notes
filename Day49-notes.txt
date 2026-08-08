@@ -1,0 +1,33 @@
+Kubernetes Day-49 ( 12-07-2026 06:55 AM IST )
+------------------------------------------------
+
+secret volume
+downwardAPI volume 
+Projected Volume
+
+kubectl create secret generic my-secret --from-literal=username=suketh --from-literal=password=admin@123
+
+downwardAPI volume:
+---------------------------
+When a pod can access its own metadata (like name, namespace, labels etc ) through a mounted volume
+
+Whenever the Pod or containers need its own information then you can inject kubernetes POD metadata and status values into the container.
+
+
+There are 2 methods of injecting this information.
+1. downwardAPI volume
+2. Environment variable
+
+
+downwardAPI volumes has 2 differents ways:
+1. fieldRef - Injects the metadata POD-level information like IP, namespace ..etc
+2. resourcefieldRef - Inject the container level resources  like CPU, Memory limits etc
+
+Next session:
+-------
+Projected volume:
+downwardAPI volume - resourcefieldRef , environment variables
+hostPath
+
+Persitent volume
+

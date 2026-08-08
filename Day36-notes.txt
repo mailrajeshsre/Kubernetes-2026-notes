@@ -1,0 +1,31 @@
+Kubernetes Day-36 ( 25-05-2026 08:39AM IST )
+------------------------------------------------
+Services:
+------------------
+1. ClusterIP
+2. NodePort
+3. Load Balancer
+4. ExternalIP
+5. ExternalName
+
+6. Headless service ( ClusterIP: None )
+-----------------------------------------------------------------------------Introduction to Headless
+
+------------
+1. Headless service makes sure Service DNS is not binded to Single ClusterIP address
+
+2. In order to create the Headless Service, we define in .spec.clusterIP=None
+
+3. Sometime we no need to Loadbalance the traffic, in such situation we need to opt for Headless service
+
+4. In Headless service, ClusteIP is allocted for which kube-proxy doesn't handle these service and there is no load balancing required.
+
+5. Headless service supports with selectors and without selectrors under service DNS
+   ---> with selector:  Kubernetes create EndpointSlice object and A Record for IPV4 and AAAA Record for IPV6 which is pointed to POD's IP Address backed by Service
+   
+   ---> without Selector: Kubernetes will not create EndPointslice object ,create A Record for IPV4 and AAAA for ipv6 address
+   Example --> ExternalName
+   
+   Next topic - Ingress Controller ( LoadBalancer - Layer 7 Load balancer)
+   
+   Gateway API's

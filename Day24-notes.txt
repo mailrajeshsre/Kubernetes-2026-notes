@@ -1,0 +1,38 @@
+Kubernetes Day-24 ( 26-04-2026 08:04 PM IST )
+--------------------------------------------------
+
+How to delete the RC using cascade option
+
+kubectl scale --replicas=<count> rc/rc-name
+
+
+Controllers:
+-----------------------
+1. RC
+2. ReplicaSet (RS)
+3. Deployment deploy---> it inturn uses the RS + other features also it carries
+4. Deamonsets
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rsprod
+  name: rsprod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rsprod
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: rsprod
+    spec:
+      containers:
+      - image: nginx:1.20.0
+        name: nginx
+        resources: {}
+status: {}

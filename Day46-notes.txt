@@ -1,0 +1,47 @@
+Kubernetes Day-46 ( 04-07-2026 06:09 PM IST )
+------------------------------------------------------
+
+Kubernetes Storage ( 5 to 6 sessions )
+---------------------------------------------------------------------------------
+
+1. Volumes
+2. Persistent Volume (PV)
+3. Persistent Volume (PVC )
+4. StorageClass
+
+Volumes:
+-----------------------------------------
+1. In general, Containers are ephemeral which files will be lost once the container crashes
+
+2. Kubelet restarts the containers which comes with clean data will be lost
+
+3. When we want to share the data across the container inside the pod , we can use volumes.
+
+4. When containers restarts with clean data, POD volume will help to persist the data , since POD uses volumes as Persistent storage solution for containers
+
+5. Container mounts the directory under .spec.containers.volumeMounts to volumes under .spec.volumes( create the volume) with common name
+
+6. Kubernetes supports 2 types of Volumes:
+    1. Ephemeral Volume (emptyDir, configMap, Secret, Downwards API , CSO ephemeral volumes, etc )
+	2. P	eristent Volume ( PV --> Static and Dynamic PV with storageclass)
+	
+7. Volume types supported by k8s.
+-----------------------------------
+AWS EBS CSI(drivers), Plugin ---> EKS --> EBS
+Azure Disk CSI 
+GCE CSI
+Vsphere CSI 
+OpenStack CSI
+cephfs, rbd
+confipMap, secret, DownwardAPI, Hostpath 
+iscsi , local , nfs
+pvc
+projected
+
+
+Volume type: emptyDir , hostpath 
+
+Next --> Storage   , emptyDir , HostPath 
+
+
+

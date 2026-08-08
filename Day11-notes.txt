@@ -1,0 +1,52 @@
+Kubernetes Day-11 ( 29-03-2026 08:41 AM IST )
+----------------------------------------------------------
+Pod Life cycle phases:
+Refer - https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
+
+Create-->Pending ---> Running--> Succeeded/Failed ---> Completed---> Delete
+Unknown
+
+kubectl run 
+kubectl apply -
+
+Creating--> Pending 
+
+kubelet --> Pod--> Pending---> container --> CPU,Memory , Image
+
+sudo apt update---> Process--> Terminated
+Running
+
+
+Succeeded Phase: Pod has been running and later Pod will go into completed state .. Succeeded Phase
+
+Whenever the Pod complete the execution, the return value will be 0
+
+Pod ---> container --> wrong command/instruction --> Failed state ..
+1 2 3 
+
+Failed phase
+
+Pod ---> restart policy
+
+
+Pod ---> Pod successfully running ---> always the container will get restarted.
+
+Successed---> no need to restart the container
+
+Failed state --> restart the container
+
+Restart Policy:
+1. Always
+2. OnFailure
+
+Container states:
+-----------------------
+https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states
+
+Waiting ---> Running---> Terminated
+
+
+watch kubectl get pod complete-flow -o jsonpath='{.status.containerStatuses[*].state}'
+
+Pod conditions
+Types of Pods

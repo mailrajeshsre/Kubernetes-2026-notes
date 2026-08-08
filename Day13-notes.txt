@@ -1,0 +1,63 @@
+
+Kubernetes Day-13 ( 03-04-2026 , 08:28 AM IST )
+----------------------------------------------------
+
+Static PODS:
+---------------------------------------------
+1. Static pods are created by kubelet on the nodes
+2. Deployment,Controller and API servers are not needed for the Static pods
+3. Static pods are controlled directly by the Kubelet
+4. Default location for YAML files for static pods is /etc/kubernetes/manifests
+
+5. whenever you want to stop the static pod , u need to remove the yaml file from the above location .
+
+6. kubectl apply will not work for static pods
+
+7. static pods runs only on that node where yaml file exists ( /etc/kubernetes/manifests )
+
+8. Live updates for static pods is possible , static pods will be recreated
+
+9. Use cases ,it is used for bootstrapping system components
+
+
+Standalone static pod features:
+---------------------------------
+1. static pods are managed by kubelet ---> and there are no controller
+2. Scaling is not possible
+3. Auto recovery - pod crash ---> no restart
+4. No versioning --> No rollout or No rollbacks
+5. Load Balancing --> Traffic cannot be distribted amongs static pods
+6. High Availbility -->  no high avilability , because it runs only on  that node
+
+
+7. In case of static pod ,if it crashes ( eg : bad image ) , restartcount=0, status=Error
+
+---------------------------------------------------------------------
+
+ephemeralContainers: 
+1. These containers used for debugging purpose
+2. This exists only while POD is running
+3. Does not restart on crash
+4. Purpose :  Basic debugging, inspecting network/processes , troubleshooting
+5. shares the PID/Network namespace along with main containers
+6. if any volume exists and which is mounted by main container, ephemeralContainers by default cannot mount the volumes, it needs manual setups
+7. ephemeralContainers are temporary containers added to running POD for debugging.
+
+Purpose:
+Live debug --> inspect running pod for any issues
+Crashloop investigation  --> 
+Network Troubleshooting --> tcpdump , ping , netstat etc
+
+----------------------------------------------
+crictl 
+
+Refer - https://kubernetes.io/docs/tasks/debug/debug-cluster/crictl/
+
+For installing crictl - Refer ( https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md )
+
+Next session :
+-------------------
+Multi containers pod
+Namespace
+
+

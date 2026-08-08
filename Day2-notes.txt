@@ -1,0 +1,160 @@
+Kubernetes Day-2 (05-03-2026 08:03 AM IST)
+----------------------------------------------------------
+
+Kubernetes Architecture, Kubernetes Installation
+-------------------------------------------------------
+
+
+Kubernetes Interfaces for extensibility
+-------------------------------------------------------
+2014 - Kubernetes when it started, earlier kubernetes use to support only Docker as container technology .
+
+Kubernetes to call the docker container , it uses to have a lot of code `dockershim` which was part of kubernetes release
+
+Kubernetes introduced a standard called as CRI (Container Runtime Interface).
+
+Any container technology can be used in kubernetes as container runtime , if it has the CRI .
+
+Kubernetes also has other standards as well
+   CNI ( Container Network Interface )
+   CSI ( Container Storage Interface )
+   
+ Docker --- CRI --> CRI-dockerd
+ containerd - CRI -> default CRI in kubernetes distribution , support linux and windows --> Light weight
+ 
+Kubernetes Installations:
+----------------------------------------
+
+Playground with Docker
+
+Playground with Kubernetes ---> provide a lot of detials
+
+
+killercoda.com ( https://killercoda.com/playgrounds/scenario/kubernetes )
+
+Self hosted k8s cluster:
+------------------------------
+Single Node: ( Developer )
+     Minikube
+	 kind
+	 k3c
+
+Multi Node:
+   Binaries
+   kops ( AWS, Azure ) 1 Master , 2 worker node
+   kubespray
+   kubeadm - stanadard method for installation ks8 cluster
+   Baremetal --> Installing K8s on physical servers
+   
+   
+ ----------------------------------------------------------
+ Installation of Kubernertes using kubeadm
+ 
+ 1 - Master ---> master-sg --> open all ports -- existing default sg -All ports are opened 
+ 2 - Worker nodes (node-1,node-2) ( minions) ---> worker-sg
+ 
+
+Docker is required, CRI 
+
+Kubernetes ---> CRI ---> Docker
+
+Step-1: Installing Docker:
+-----------------------
+Refer ( https://get.docker.com/ )
+
+curl -fsSL https://get.docker.com -o install-docker.sh
+
+sudo sh install-docker.sh
+
+sudo usermod -aG docker ubuntu
+
+sudo hostnamectl set-hostname master
+-------------------------
+
+Step-2: Installing kubeadm, kubelet and kubectl on all the nodes
+---------------------------------------------------------------
+sudo apt-get update
+# apt-transport-https may be a dummy package; if so, you can skip that package
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+# If the directory `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
+# sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.35/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+Step-3: Installing CRI on all the machines (cri-dockerd)
+-------------------------------------------------------
+Go to the repo ( https://github.com/Mirantis/cri-dockerd )
+
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.24/cri-dockerd_0.3.24.3-0.ubuntu-jammy_amd64.deb
+
+sudo dpkg -i cri-dockerd_0.3.24.3-0.ubuntu-jammy_amd64.deb
+
+
+Switch to the root user, execute the below command to configure kubernetes cluster
+------------------------
+
+kubedadm init
+
+kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.44.55:6443 --token b7pc9p.44oim4hxzn4oh8e0 \
+        --discovery-token-ca-cert-hash sha256:3e8874b88717baa0285cb4991585785f4a2ddde8d3a97b093c37ba73c0582ce1 --cri-socket unix:///var/run/cri-dockerd.sock
+
+
+Step-4: Installing the CNI ( Waeve net-CNI )
+------------------------------------------------------
+
+https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+----------------------------------------------------------------
+
+New kubeadm init command output
+-------------------------------------------
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.45.166:6443 --token 8mchrj.n8rtloxjkff8prbf \
+        --discovery-token-ca-cert-hash sha256:19ca63740e75b7b0d7b6a4cf5b09dbd154ccfb0400f3a02e9cd0df1cc56eaf75 --cri-socket unix:///var/run/cri-dockerd.sock
+		
+		
+
+
+
+
+   
+

@@ -1,0 +1,90 @@
+Kubernetes Day-7 ( 16-03-2026 08:26 AM IST )
+------------------------------------------------
+Example 2: A Pod with nginx container and alpine container
+-------------------------------------------------------------
+
+format
+----------
+<apigroup>/<version>
+
+core/v1 ===> v1
+
+docker container run alpine
+exited
+
+docker container run alpine sleep 1d
+
+```` yaml````
+------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container
+spec:
+  containers:
+    - name: first
+      image: nginx
+    - name: second
+      image: alpine
+      command:
+        - sleep
+        - 1d
+
+----------------------------------------------------------------------------
+Example-3:  A Pod with alpine container without the cmd
+
+restart policy: by default the restart is always
+
+restart Policy: never
+
+````yaml ```
+-------------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alp-container
+spec:
+  containers:
+    - name: alp
+      image: alpine
+	  
+-----------------------------------------------------------------------
+
+Example-4: A Pod with the environment variables
+
+docker --> mysql container ---> environment variable MYSQL_ROOT_PASSWORD
+
+docker container run -d --name mysqldb \
+              -e MYSQL_ROOT_PASSWORD=devops \
+			  -e MYSQL_DATABASE=nop \
+			  -e MYSQL_USER=devops \
+			  -e MYSQL_PASSWORD=devops \
+			  mysql:5.7
+			 
+yaml
+-------------------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysqldb
+spec:
+  containers:
+    - name: mysql
+      image: mysql:5.7
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: devops
+        - name: MYSQL_DATABASE
+          value: nop
+        - name: MYSQL_USER
+          value: devops
+        - name: MYSQL_PASSWORD
+          value: devops
+
+Next session: Introduction to POD , different state of the pod
+
+Pod resources and limits
+

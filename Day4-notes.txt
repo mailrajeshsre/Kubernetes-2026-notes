@@ -1,0 +1,66 @@
+Kubernetes Day-4 ( 12-03-2026 08:16 AM IST )
+-------------------------------------------------------
+REST API , apiVersion
+
+
+## How to Create kubernetes  Workloads
+
+
+REST API's
+------------------------------
+
+In kubernetes master node, we have the API Server
+
+Kubernetes ---> resources ( libraries ) ---> all functionality of your kubernetes master is exposed via REST API
+
+
+Questions:
+-------------------
+1. What are HTTP Methods and what do they signify?
+GET
+POST
+PUT
+DELETE
+
+2. How do we know the HTTP request is working or not working?
+
+1xx - info
+2xx - success
+3xx - Redirection
+4xx - Client side error
+5xx - Server side error
+
+Library management tool 
+------------------------
+
+
+REST API's  ---> libraries ( Resources )
+
+Books:
+POST--->
+GET 
+PUT
+DELETE
+
+
+User:
+-------
+POST
+PUT
+GET 
+DELETE
+
+
+Refer to - https://developers.facebook.com/documentation/business-messaging/whatsapp/messages/send-messages#requests
+
+Kubernetes has a REST API for all the resources of ks8 exposed by kube API Server.
+
+
+Next session:
+-----------------
+Kubernetes  resources
+
+kubernetes API Management
+
+
+

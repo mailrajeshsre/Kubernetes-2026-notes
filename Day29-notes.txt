@@ -1,0 +1,45 @@
+Kubernetes Day-29 ( 07-05-2026 , 08:06AM IST )
+----------------------------------------------------------
+
+Kubernetes probes:
+--------------------------------
+
+There are 3 types of probes:
+
+1. liveness probe:
+    This probe determines whether the application in the container is started correctly or not. If the check fails, then kubernetes will try to restart the container according to restart policy 
+
+2. Readiness probe:
+     This probe determines whether the container is ready state to serve the client requests. If the check fails, the service will not forward the client request to that pod
+
+3. startup probe:This probe is added to check for any slow starting applications. if the startup probe fails, then liveness probe will not be executed. 
+
+
+Refer - https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+
+https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe
+
+Types of probe checks:
+------------------------------
+1. exec: commands , curl , ping , wget
+2. httpGet: this is used when we are sending the http request to check
+3. tcpSocket:  it check if the port is open or not  , jenkins ->8080, nginx->80
+4. grpc: Client & Server , grpc protocol is used 
+
+Pod 
+ReplicaSet
+Deployment
+DaemonSet
+
+spec.container.probes
+
+http: return code status values:
+---------------------------------
+1XX ---> information
+2XX ---> Success or OK
+3XX ---> Redirection
+4XX---> Client side errors
+5XX---> Server side errors
+
+
+Next session:

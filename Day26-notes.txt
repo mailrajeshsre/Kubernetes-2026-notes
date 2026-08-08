@@ -1,0 +1,55 @@
+Kubernetes Day-26 ( 01-05-2026 08:36 PM IST )
+---------------------------------------------------
+
+Kubernetes Deployments(Deploy)
+---------------------------------
+
+Deployments
+Services
+Job & Cronjobs
+Auto cleanup for finished jobs
+DaemonSet
+StatefulSet
+Probes (startup, readiness,liveness probes)
+
+1.Deployment objects has the same feature as ReplicaSets has provided.
+
+2. Deployment in addition it has rollout(upgrade) and rollback(downgrade) applications
+
+3. workflow - Deployment--> ReplicaSet --> POD
+
+4. Features: Rollout,Rollback , Scalein , Scaleout , Pause Rollout/Rollback , remove older RS
+
+5. apiVersion  for Deployment object - apps/v1
+
+6. when Deployments manages Relicaset, it created the pod-template-hash label will be created and we need to make sure that it should not be modified
+
+7. Rollout and Rollback can be performed through Imperative(recommended) or Declarative approach
+
+8. When we do rollout , the deployment  will maintain the number of rollouts and you can get the information about rollout by executing the commands
+
+
+kubectl rollout history deployment <deployment-name>
+
+kubectl rollout undo deployment/deploy-name
+
+kubectl rollout undo deployment/deploy-name --to-revision=3
+
+9. Duplicate revision details (podTemplate) are not stored, for which latesth revision number will be listed and old one will be removed 
+
+10. Deployment supports 2 strategies :
+    1. RollingUpdate (default) 
+	     Max Unavlable & Max Surge
+	2. Recreate
+
+11. Deployment revision history limit is default 10 , and it can be increased by setting under .spec.revisionHistoryLimit: 20
+
+
+Refer - https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.36/#deployment-v1-apps
+
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+Deployment scalein and scaleout
+-----------------------------------------
+
+Next session - Rollout and Rollback strategy - Rolling Update & Recreate

@@ -1,0 +1,63 @@
+Kubernetes Day-23 ( 24-04-2026, 10:02 AM IST)
+---------------------------------------------------------
+
+Workload Managements (controllers)
+
+Pod-> container -> image
+
+Pod desired state is to ensure the container is running.
+
+ Controller objects
+     1. Replication controller --> not in-use
+	 2. Replica Set
+	 3. Deployments--> will inturn use ReplicaSet,  Zerodown time & Rollback
+	 V1.0 --> V2.0
+	 4. DeamonSet
+	 
+
+App--> 3 Pods---> I need 3 Replicas where my app will be running .
+
+replicas
+
+Refer -> https://kubernetes.io/docs/concepts/workloads/controllers/
+
+
+Replication Controller:
+-----------------------------------
+
+1. It makes sures specified number of pods(workload) are running at any given point of time on the cluster.
+
+2.RC will make sure that only specified number of Pods are running and it will add/remove if it founds any mismatch 
+
+3. apiVersion: ReplicationController object - v1
+
+4. It is recommened to deploy the application on k8s with min workload resource like ReplicationController instead of creating pod through standalone.
+ 
+
+5.RC --> pods --> that pod will use Podtemplate spec
+
+6. RC will use the Pod Template spec to create the POD with the same specficiation based on replica count
+
+7. scalin and scaleout of replicas are done using the command line 
+
+kubectl scale --replicas=<count> rc/rc-name
+
+8. Pod selector .spec.template.metadata.labels should be equal to spec.selector to handle Replication controller
+
+9. Whenver you want to delete the pod,you need to delete rc not the pod
+
+10. We can delete RC without deleting the pods by using the cascade options
+
+kubectl delete --cascade=orphan 
+
+11. Pods controller by RC can be isolated by changing the labels ( to troubleshoot by moving out of service)
+
+-------------------------------------
+
+RC: yaml manifest
+
+scalin and scaleout
+
+Next -
+continue RC
+ReplicaSet

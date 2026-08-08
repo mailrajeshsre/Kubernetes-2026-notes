@@ -1,0 +1,50 @@
+Kubernetes Day-43 ( 20-06-2026 09:01 PM IST )
+------------------------------------------------------
+
+Gateway API + Controller (Nginx Fabric , Traefik, Envoy Controller, Isitio)
+
+
+Gatewayclass ---> Nginx
+
+
+Gateway
+
+Httproute ---> Routing rules
+kind: HTTPROUTE
+
+app1, app2, app1-svc , app2-svc
+
+
+Gateway API weighted Routing  , Host-based routing , path-based routing
+
+
+Weighted routing in kubernetes Gateway API allows the split of traffic between multiple backend services based on percentages. 
+
+1. Canary Deployments
+2. Blue - Green Deployments
+3. A/B Testing 
+4. Gradual Rollouts
+
+Gateway API weighted based Routing
+
+
+	
+ns-526.awsdns-01.net
+ns-478.awsdns-59.com
+ns-1275.awsdns-31.org
+ns-1724.awsdns-23.co.uk
+
+
+path based routing 
+host based routing
+
+tcproute
+
+HTTPROUTE
+TCPROUTE
+
+
+Gateway API--> http, https, tls, tcp , udp , grpc , 
+
+nginx-fabric ---> envoy-controller, traefik 
+

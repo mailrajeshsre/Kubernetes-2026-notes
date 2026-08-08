@@ -1,0 +1,106 @@
+Kubernetes Day-5 ( 15-03-2026 09:09 AM IST )
+-------------------------------------------------------
+
+Day-4
+------
+Client -- API Server  ( REST API's )
+
+client ---> API server ---> http ---> access any of the API resource with this REST API's
+
+program/code --> API Server ---> Via http
+command  ---> API Server ---> via http
+
+Curl --> via http
+
+Manifest file (YAML) ---> API Server
+
+
+Ecommerece ---> modules ---> Java, Python , Go --> REST API's
+------------------------------------------------
+
+## How to create k8s workloads
+--------------------------------------
+
+
+Kubernetes has a REST API for all the resources of kubernetes exposed by kube API Server
+
+All the resources that can be created by k8s can be fetched by `kubectl api-resources` command
+
+API Resources  ---> libraries ---> REST API's---> versioning
+
+Refer --> https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management/
+
+
+
+Refer ---> https://kubernetes.io/docs/concepts/overview/kubernetes-api/
+
+API Versioning
+
+Creation types:
+   1. Imperative: Construct a command line
+   2. Declartive: Create a manifest file (YAML)
+   
+Kubernetes API versioning: ( https://kubernetes.io/docs/reference/using-api/#api-versioning )
+
+ Group
+ Version: 3 level --> alpha, beta and stable
+ 
+ API Groups:
+ ----------
+ core ---> most of the API resources comes under core group
+ other
+ 
+API Version:
+-----------------------
+##format
+<apiGroup>/<version>
+
+## core group
+<version>
+
+API Version examples:
+-----------------------------------------
+Group --> core
+version -> v1
+core/v1 ---> v1
+
+network.ks8.io/v2beta3
+
+Group --> network.ks8.io
+version --> v2beta3
+
+kubectl cheat sheet --> https://kubernetes.io/docs/reference/kubectl/quick-reference/
+
+
+
+Play with pods
+----------------------------------
+Imperative:
+---------------------
+kubectl run web1 --image nginx
+kubectl run web2 --image httpd
+
+kubectl run --help
+
+
+declarative
+-------------------
+````yaml````
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web3
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+kubectl apply -f web3.yaml
+
+ 
+ 
+ 
+
+

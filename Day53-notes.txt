@@ -1,0 +1,16 @@
+Kubernetes Day-53 ( 22-07-2026 10:18 AM IST )
+------------------------------------------------------------
+nfs persistent volume - pod , deployment object
+
+
+Persitent Volume ( PV,PVC)
+
+Persistent VolumeClaim ---> 2 imp resources of Kubernetes API server
+
+
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+Next session:
+
+write the notes on pv and pvc
+nfs shared drive , deployments --> jenkins server --create a job (free style projects)

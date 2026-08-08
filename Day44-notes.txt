@@ -1,0 +1,98 @@
+Kubernetes Day-44 ( 22-06-2026 12:05 PM IST )
+-----------------------------------------------------
+Gateway API (CRD's ) + Gateway controller ( Nginx Fabric ) - HTTP , HTTPS, TCP(doesn't support ) ,UDP, GRPC, MTLS
+
+weight based routing 
+path based routing
+host based routing 
+
+
+HTTPRoute ---> http https protocol
+TCPRoute
+
+www.google.com/gmail ---> gmail page loaded
+
+www.google.com/music ---> music page loaded
+
+www.haseebops.com --->  Hello from V1 or Hello from V2
+
+www.haseebops.com/login ---> Hello from Login page
+
+www.haseebops.com/payment ---> Welcome to  payment page
+
+
+www.haseebops.com/app1
+---> Hello from V1
+
+
+www.haseebops.com/app2
+---> Hello from V2
+
+
+www.haseebops.com/app1/
+--> Hello from V1
+
+www.haseebops.com/app1/admin
+--> Hello from V1
+
+
+ns-210.awsdns-26.com
+ns-1686.awsdns-18.co.uk
+ns-993.awsdns-60.net
+ns-1038.awsdns-01.org
+
+TCPRoute:
+---------------
+
+http ---> https (install the certification , TLS termination )
+Nginx ingress controller
+
+http,https---> HTTPRoute
+
+TCPRoute based Routing : (TCP Protocol , Port number )
+-----------------------------------------
+
+http(80), https(443) 
+
+Gateway API is basically used for HTTP/HTTPS routing ( path-based, host-based, weight-based), But some application dont use the HTTP , they communicate only over raw TCP connections, then we use TCP Route Based Routing 
+
+Examples:
+1. Databases 
+2. Message Queues ( RabbitMQ, Kafka )
+3. LDAP Authentication services
+
+4. Custom TCP Applications
+
+
+Gateway API + Envoy gateway controller ( TCProute) 
+
+---------------------------------------
+
+GRPCRoute 
+
+From tomorrow : Kubernetes Volumes - 4 sessions
+
+Kubernetes scehduler
+
+Kubernetes Dashboard
+
+Kubernetes jobs, Daemonset , Statefullset
+serviceaccount
+Secrets , Configmap
+Hashicorp Vault
+Helm - 8 sessions
+
+Security - 40 hours
+Kubernetes security , ClusterRole, ClusterRollBinding
+Networking  , CNI
+
+Troubleshetting 
+
+Projects - 4 
+
+Kustomize - 3 sessions
+Argo-CD 6 sessions
+Isito - 8 to 10 sessions
+
+
+

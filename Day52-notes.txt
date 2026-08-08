@@ -1,0 +1,56 @@
+Kubernetes Day-52 ( 19-07-2026 09:43 AM IST )
+------------------------------------------------------
+
+Persistent Volume - permanent volume
+1. local - hostpath
+2. network - nfs shared drive 
+
+Use case of Hostpath: 
+1. Log collector
+2. Monitoring Agents
+
+3. Host level Access tools  - security agents, troubleshoot pods
+4. CI/CD Agents
+5. Customized config/scripts ---> hostpath volume
+
+High Availability ---> we cannot use hostpath volume
+
+Peristent volume -> NFS storage
+
+Setup NFS server in Node-2
+----------------------------------------
+
+sudo apt update
+sudo apt install nfs-kernel-server -y ----> nfs will be installed, as part of it even nfs-common will also get installed , nfs-common - nfs client
+
+
+create a shared directory in Node-2
+
+sudo mkdir -p /srv/nfs/kubedata
+sudo chown nobody:nogroup /srv/nfs/kubedata
+sudo chmod 777 /srv/nfs/kubedata
+
+vi /etc/exports 
+----
+/srv/nfs/kubedata *(rw,sync,no_subtree_check,no_root_squash)
+
+exportfs - rav
+
+systemctl restart nfs-kernel-server
+
+Node-1:
+-----------------------
+sudo apt update
+sudo apt install nfs-common -y
+
+How to Test the NFS mount
+-------------------------------
+sudo mount <NFS-server-Ip>:/srv/nfs/kubedata /mnt
+df -h /mnt
+sudo umount /mnt
+
+exportfs -v
+
+Next session: nfs storage --> deployment , jenkins server --> nfs storage
+
+Peristent volume , Peristent volumeclaim

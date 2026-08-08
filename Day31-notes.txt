@@ -1,0 +1,116 @@
+Kubernetes Day-31 ( 15-05-2026 08:42 AM IST )
+------------------------------------------------------
+
+Kubernetes services and Types:
+--------------------------------------------------
+
+Service is a way to access the PODS managed by workload resources
+
+RC, RS, Deployments
+
+Deployment --> ReplicaSet ---> --replicas=3 ---> 3 PODS
+
+
+User (Client )---> 3 PODS
+
+Services
+
+User ----> Services ---> PODS
+
+In Kubernetes , Services acts like a load balancer (Internal)
+
+Types of Services:
+-------------------------------------
+1. ClusterIP (default)
+2. NodePort
+3. Load Balancer
+4. ExternalIP
+5. ExternalName
+6. Headless ( ClusterIP: None)
+
+Service WorkFlow - Refer to the diagram
+
+Introduction to Services:
+------------------------------------------------
+Service  is a way to provide logial abstraction to allow access to application running on set of PODS
+
+It will make sure traffic is split to backend PODS managed by workload resources using Loadbalancer Mechansim (RR as default)
+
+We can create different services by passing .spec.type=ClusterIP/NodePort/LoadBalancer
+
+Backend PODS are integrated to services by means of Endpoint Objects
+
+Service has a single point of contact with DNS and backend PODS with unique IP address (dynamic,Ephermal IP-address)
+
+
+Service will be reachable on IP address as well , which is called as ClusterIP ( VIP mechanism)
+
+Service DNS names are provided by component called as CoreDNS, add-on on K8s cluster
+
+Service identifies backend targets(PODS) by selector ( .spec.selector: app: nginx) 
+
+
+Service can be created with Endpoints (default) or without Endpoints (EndpointSlice object)
+
+
+
+Services uses the protocol  - Default Protocol - TCP , UDP, SCTP
+
+Services Can be identified with 2 primary modes
+  1. Environment variables 
+  
+  Pod --> container ---> nginx ---> command --> printenv ---> 
+         SVCNAME_SERVICE_HOST
+		 SVCNAMR_SERVICE_PORT
+		 
+   2. DNS - my-svc.namespace.svc.cluster.local ---> DNS name
+            my-svc.default.svc.cluster.local
+
+
+ClusterIP: It is one of the service , ClusterIP is used to access the application inside the kubernetes cluster
+
+Frontend --> master or worker-node
+
+
+ClusterIP is a default Service type, if not passed while creating service
+
+Service create a VIP address which is accessible within the cluster
+
+Every Service has its own DNS and ClusterIP
+
+In kubernetes, Kube-proxy is repsonsible for VIP Mechanism for service except for ExternalName service type
+
+kube-proxy has 4 to 5 modes :
+-------------------------
+1. IPtables ( default )
+2. nftables
+3. IPVS (low latency , higher throughput and better perfomance )
+4. Userspace ( old legacy mode , which is not recommended any more )
+5. Kernelspace
+
+
+Execute the command to check which mode the kube-proxy is using
+
+curl http://localhost:10249
+---------
+ ProxyMode
+ Health
+ Metrics
+
+Refer -> https://kubernetes.io/docs/concepts/services-networking/service/
+
+https://kubernetes.io/docs/reference/networking/virtual-ips/
+
+https://kubernetes.io/docs/reference/networking/virtual-ips/#proxy-modes
+
+kube-proxy supports session affinity and stickiness timeout
+
+--> spec.sessionAffinity (ClusterIP, None)
+---> spec.sessionAffinityConfig.ClientIP.timeoutSeconds ---> Default - 3 hours --> 10800 Seconds
+
+These above Affinity will not be supported on Windows Worker-Node
+
+Next session:
+-------------------
+Imperative
+Declarative --> commands , endpoints

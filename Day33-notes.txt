@@ -1,0 +1,64 @@
+Kubernetes Day-33 ( 17-05-2026 09:02 AM IST)
+-----------------------------------------------------------
+
+
+Service: NodePort
+
+ClusterIP ---> Service ---> Communication between 2 POD which are part of Kuberenetes Cluster
+
+
+POD(Frontend)--->Servie(ClusterIP)------------>Backend-POD
+
+If i want to access the service from outside the cluster
+
+1. port-forward  (temporary Method)         Docker ---> portforward -p or -P
+                                           -p <node-port>:<container-port>
+										   
+kubectl port-forward
+
+2. kubectl expose or Service YAML ---> service -Permanent -type=ClusterIP/NodePort
+
+Introduction to NodePort Service:
+------------------------------------------
+1. In order to expose the service on each node to external traffic using fixed port of nodes in the cluster
+
+2. Workflow ---> Extenal Traffic ---> <Ip-address>:31000 (NodePort) ---> Service(ClusterIP) ---> Backend POD (nginx is running)
+
+3. While creating the Service Objet, we need to specify the type: NodePort
+
+4. By default, Kubernetes allocate the port number range from 30000 to 32767 
+ but this range can be changed , Suppose i want the range from 30000 to 31000
+ 
+ 5. We can check the Nodeport assigned to the service under .spec.ports.nodePort=32410
+ 
+ 6. In order to set the custom IP address for the NodePort service, we need to define --nodeport-address flag for kube-proxy process of kube-proxy config file (nodePortAddress)
+ 
+ 
+ 7. With the NodePort Service, we need to open the firewalld on each nodes ,if enables, unnessaily even POD is not running on that node
+ 
+ External Vs Internal Traffic
+ 
+ Internal Traffic ( Service) can be only be access from within the cluster
+ 
+ External Traffic ---> Refers to requests coming from outside the kubernetes cluster( like Internet)
+ 
+ NodePort is thr one of the method
+ 
+ NodePort is the type of Service in Kubernetes that opens a fixed port on each node in the cluster. External client can send the requesrs to this port and kubernetes will route the request to the correct pod inside the cluster.
+ 
+ Workflow:
+    External client sends a request to NodeIP+NodePort (192.168.0.10:31000)
+	The request reaches to the NodePort Service
+	NodePort Routes internally to ClusterIP Service
+	ClusterIP forward the request to the backend POD based on the Label selector
+	
+	
+https://kubernetes.io/docs/reference/kubectl/generated/kubectl_patch/
+
+
+
+Customize the NodePort Range and IPAddress Range
+----------------------------------------------------------
+
+Current NodePort -- 30000 to 32767
+Customize ----> 30000 to 31000

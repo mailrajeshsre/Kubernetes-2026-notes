@@ -1,0 +1,203 @@
+Kubernetes Day-6 ( 15-03-2026 05:06 PM IST )
+----------------------------------------------
+
+declarative
+-------------------
+````yaml````
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web3
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+kubectl apply -f web3.yaml
+
+
+kubectl apply -f manifests/
+
+   81  kubectl get pods
+   82  kubectl delete -f manifests/
+   83  kubectl get pods
+   84  kubectl exec -it web3 -- /bin/bash
+   85  kubectl exec web3 -- pwd
+   86  kubectl exec web3 -- whoami
+   87  kubectl exec -it web3 -- /bin/bash
+   88  kubectl get pods
+   89  kubectl get pods -o wide
+   90  kubectl describe pod web1
+   
+kubectl delete pod web1 web2 web3
+
+
+How to write the manifest(YAML) template file from scratch:
+-----------------------------------------------------------------
+
+## YAML format (k8s, Ansible,)
+--------------------------------
+
+Introduction YAML structure:
+---------------------------------------
+
+YAML: This is a file format for representing data which uses name value or key value pairs as a basic structure.
+
+YAML Files generally have an extension of .yaml or .yml
+
+
+Basic structure
+-----------------
+
+name: <value>
+
+name-1: <value1>
+name-2: <value2>
+..
+...
+name-n: <valuen>
+
+Types of data's
+----------------------
+
+Simple/Scalar:
+---------------
+     1. Text
+	 2. number
+	 3. boolean
+
+Complex:
+---------
+     1. object/map
+	 2. array/list
+	 
+1. Text data type:
+---------------------
+city: Bangalore
+city: 'Bangalore'
+city: "Bangalore"
+
+2. number
+-------------------------
+population: 12.7
+age: 35
+
+3.boolean data type
+--------------------------------------
+metro: true/false
+metro: yes/no
+
+4. list or array
+----------------------------
+
+areas: ['Rajajinagar', 'Vijaynagar', 'Nagarbhavi']
+
+areas:
+- Rajajinagar
+- Vijaynagar
+- Nagarbhavi
+
+areas:
+  - Rajajinagar
+  - Vijaynagar
+  - Nagarbhavi
+  
+5. Object/map
+--------------------------
+yaml
+-----------------
+address:
+  flatno: 601
+  building: nilgiri
+  area: Health layout
+  city: Bangalore
+
+
+Refer to link to learn on YAML Data format
+---------------------------------------------------------
+https://learnxinyminutes.com/yaml/
+
+https://docs.ansible.com/projects/ansible/latest/reference_appendices/YAMLSyntax.html
+
+Generally YAML for a specific tool comes with a structure or schema
+
+
+Lets create a structure for filling a product information on ecommerece website
+-----------------------------------------------------------------
+
+create a yaml file based on following 
+
+``````````
+name: string
+manufactuer: string
+skus: sku array
+
+## skus
+name: string
+description: string
+price: number
+
+yaml file:
+------------
+---
+name: LG 242
+manufactuer: LG
+GST: 22
+skus:
+  - name: "3 Star Smart Inverter Single Door Refrigerator"
+    description: "Single Door"
+	price: 24,990
+  - name: "5 Star Smart Inverter Double Door Refrigerator"
+    description: "Double Door"
+	price: 60,000
+	
+	
+-------------------------------------------------
+
+Lets start writing pod manifests file from scratch:
+---------------------------------------------------------------
+
+Kubernetes Pods have containers in it .
+
+Anything which you create in kubernetes it is an object
+
+Pod object:
+------------------------
+YAML
+
+We need to refer to Kubernetes API Reference documentation
+Refer ( https://kubernetes.io/docs/reference/ )
+Refer ( https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/ ) for k8s api reference
+
+apiversion
+
+apiGroup/version
+
+POD
+core/v1
+
+node
+core/v1
+
+apiVersion: core/v1
+apiVersion: v1
+
+Refer ( https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#pod-v1-core ) for pod spec
+
+Example:1  : A Pod is created with nginx container
+----------------------------------------------------------
+
+Next class:
+---------
+Few more examples
+
+POD , states of POD
+	
+
+
+
+
+
+

@@ -1,0 +1,148 @@
+Kubernetes Day-45 ( 28-06-2026 09:08 AM IST)
+-------------------------------------------------
+
+Gateway API - grpc based routing 
+
+
+Gateway API crds + controller==> functionality of Gateway API 
+
+Nginx Fabric ---> HTTP Route + GRPC Routes 
+Traefik controller -> HTTP/HTTPS Route, TLS Termination, GRPC based routing , Header
+kong controller
+Envoy-Gateway-controller --> HTTP/HTTPS Route, TLS Termination, TCPRoute ,GRPC based routing 
+Isito Controller - Advance controller -> HTTP/HTTPS Route, TLS Termination, GRPC based routing + Advance feature 
+
+
+Gateway API supports gRPC traffic routing using GRPCRoute resources , this allows routing gRPC service based on function , method , hostnames and headers similar to what we see in HTTP Routing 
+
+Prerequisites:
+-----------------
+1. Kubernetes cluster ( Akamai)
+2. Gateway API - CRDs
+3. Gateway controller ( Envoy Gateway controller )
+
+Installation:
+--------------------------
+1. 
+Installing helm
+---------------------------
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
+2. Installing Envoy Gateway controller:
+-------------------------------------
+helm install eg oci://docker.io/envoyproxy/gateway-helm --version v1.5.0 -n envoy-gateway-system --create-namespace
+
+3. kubectl -n envoy-gateway-system wait --for=condition=Available deployment/envoy-gateway --timeout=5s
+
+4. kubectl get crds | grep -i gateway
+   kubectl get namespace 
+   kubectl get all -n envoy-gateway-system
+   
+
+kubectl get gateway/grpc-gateway -n default -o jsonpath='{.status.add
+resses[0].value}'
+
+export GATEWAY_HOST=$(kubectl get gateway/grpc-gateway -n default -o
+jsonpath='{.status.addresses[0].value}')
+
+echo $GATEWAY_HOST
+
+Install the grpcurl
+------------------------
+https://github.com/fullstorydev/grpcurl/releases/download/v1.9.2/grpcurl_1.9.2_linux_x86_64.tar.gz
+
+wget https://github.com/fullstorydev/grpcurl/releases/download/v1.9.2/grpcurl_1.9.2_linux_x86_64.tar.gz
+
+
+tar -zxvf grpcurl_1.9.2_linux_x86_64.tar.gz
+
+mv grpcurl /usr/local/bin
+
+grpcurl --version
+
+grpcurl -plaintext -authority=grpc-example.com ${GATEWAY_HOST}:80 yages.Echo/Ping
+
+{
+  "text": "pong"
+}
+ 
+
+-----------------------------
+How the developers write the code using grpc service
+
+
+Proto type:
+-------------------------
+
+service UserService {
+    rpc GetUser ( GetUserRequest)
+	     return (UserResponse);
+}
+
+service OrderService {
+     rpc GetOrder ( GetOrderRequest )
+	     returns (OrderReponse);
+}
+
+Backend Services:
+-----------------------
+Service:
+   user-grpc-service
+   
+Service:
+    order-grpc-service
+	
+GRPCRoute:
+-----------------------------
+hostnames:
+  - "grpc-gateway.com"
+rules:
+  - matches:
+      - method:
+          service: UserService
+          method: Ping
+    backendRefs:
+      - name:user-grpc-service
+        port: 50051
+        weight: 1
+  - matches:
+      - method:
+          service: OrderService
+    backendRefs:
+      - name: order-grpc-service
+        port: 50051
+		
+		
+Traffic flow:
+-------------------------------
+
+
+http://grpc-gateway.com/UserService/* ---> user-grpc-service
+
+http://grpc-gateway.com/OrderService/* --->order-grpc-service
+
+GRPCRoute complete capabilites
+---------------------------
+
+1. Host based routing 
+
+2. Method based routing 
+
+3. Header Matching
+
+4. Traffic splitting ( Weight based routing )
+
+5. TLS Termination ( HTTPS --- self signed certificate)
+
+6. Canary Deployment / Blue Green deployment 
+
+7. Multi service Routing 
+
+Next topics: Kubernetes Storage - 6 sessions
+
+AWS -> Kubernetes cluster
+
+Master
+Worker-node

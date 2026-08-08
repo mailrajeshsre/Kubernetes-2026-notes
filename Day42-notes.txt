@@ -1,0 +1,90 @@
+Kubernetes Day-42 ( 16-06-2026 12:05 PM IST )
+-------------------------------------------------------------
+
+Gateway API Ingress controller:
+--------------------------------------
+
+The Gateway API is the next generation networking API for kubernetes, designed to replace and improve upon the traditional ingress API.
+
+Advantages:
+---------------
+1. Better traffic routing ( HTTPRoute, TCPRoute, GPRCRoute )
+2. Role oriented configuration
+3. Multi Tenancy configuration
+4. Traffic splitting 
+5. Header based routing 
+6. http , https, tcp, udp, grpc, mtls 
+7. Extensible architecture
+
+Ingress resources + controller
+
+ingress.yaml + route (rules)
+
+
+Main components of Gateway API
+--------------------------
+Resources:
+------------------
+1. GatewayClass ---> defines the Gateway implmenetation
+2. Gateway ---> entry point for the traffic
+3. HTTP ROUTE ---> Http traffic rules
+
+4. TCP Route---> Tcp traffic routing
+5. TLSRoute ---> TLS traffic routing ( https , http-->https )
+6. ReferenceGrant ---> Cross namespace access
+
+Nginx Ingress controller ---> less feature ---> HTTP only scope . 
+
+TCP, GRPC, MTLS, header based routing, cross namespace delegation, advance traffic policies
+
+Ingress controller --> Nginx -F5 Nginx Ingress controller
+
+Kubernetes CNCF --> Ingress Nginx controller
+
+Traefik --> Traefik Ingress controller
+
+ingress.yaml ---> IngressClass, Routing rules, annoatations
+
+
+Gateway API 
+---------------------------
+Gateway API + Nginx fabric controller
+
+Gateway API + Traefik controller
+
+GatewayClass ---> it defines the load balancer
+
+Gateway --> defines the listeners ( Ports, protocol, TLS termination )
+
+Routes (HTTPROUTE, HTTPSROUTS, GRPCROUTE .... ) defines the routing rules
+
+Policies ---> attach behaviours ( timeouts, retries, auth etc )
+
+Gateway API provides portability
+
+------------------------------------------------
+
+Lab exercises for Gateway API 
+-------------------------------------
+
+1. K8s cluster ---> Akamai Cloud ---> K8s cluster --- Akamai
+
+2. AWS --- Route53
+
+3. Namecheap.com ---> haseebops.com
+
+4. Gateway API CRD Installation 
+
+
+Gateway API by default is not supported by your Kubernetes API 
+
+kubectl api-resources |  grep -i gateway 
+
+CRD ( Custom resource defintions ) 
+
+ Developed some project ---> integrate into the k8s cluster ---> API server--> your project resources ---> API Server--> ETCD Databases
+ 
+ Gateway API --> API Server ---> CRD ---> Intgerating the Gateway API resources to the API Server  ---> ETCD Databases
+
+
+

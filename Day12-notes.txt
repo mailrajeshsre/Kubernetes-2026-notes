@@ -1,0 +1,42 @@
+Kubernetes Day-12 ( 31-03-2026 08:25 AM IST)
+---------------------------------------------
+
+Refer - https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions
+
+Pod Conditions:
+-------------------------
+PodScheduled
+
+---------------------------------
+
+Pod ---> containers
+
+Different types of containers:
+--------------------------------
+1. initContainers: init container are created before the main containers
+    Refer - https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+	
+2. Containers (main) - this is the container which runs your app/microservices
+3. ephemeralContainers
+4. Sidecar Containers ( V1.28 , Native side car )
+      https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/
+      https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/
+5. Static containers
+6. Multi-containers
+
+
+You can define the init container while writing yaml file for pod creation 
+
+Create a manifest file where we configure the initcontiners where we create alpine container with sleep 10s
+main container - run nginx web server
+
+kubectl get pods -o wide -w(watch)
+
+Now, lets add 2 more init container
+
+Purpose of Init containers:
+------------------------
+1. Preconditions for the main container
+2. Change the configuration
+3. Data base tables
+

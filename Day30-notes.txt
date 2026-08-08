@@ -1,0 +1,20 @@
+Kubernetes Day-30 ( 09-05-2026 10:08 AM IST )
+----------------------------------------------------
+
+POD ---> Imperative method/command line 
+    ---> Declarative method /yaml ---> kind: Pod, kind: ReplicaSet/Deployment
+	
+	spec.container.---> container
+Pod ---> container --> image
+
+
+1. liveness probe:
+    This probe determines whether the application in the container is started correctly or not. If the check fails, then kubernetes will try to restart the container according to restart policy 
+
+2. Readiness probe:
+     This probe determines whether the container is ready state to serve the client requests. If the check fails, the service will not forward the client request to that pod
+ 
+3. startup probe: This probe is added to check for any slow starting applications. if the startup probe fails, then liveness probe will not be executed.  Startup probe will always be called once when the containers are created in the POD
+
+Next session - Services
+

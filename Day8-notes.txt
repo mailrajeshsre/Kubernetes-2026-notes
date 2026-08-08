@@ -1,0 +1,72 @@
+Kubernetes Day-8 (19-03-2026 08:31 PM IST )
+--------------------------------------------------------
+
+Kubernetes Resource Managements
+Labels
+
+------------------------------------------------------------------
+
+Example 5: 
+Docker containers we might need to pass a CMD or ENTRYPOINT
+
+Kubernetes -> pod --> 
+
+docker
+----------------
+
+docker container run -d --name test1 alpine
+
+docker container run -d --name test2 alpine sleep 1d
+---------------------------------------------------------------------
+
+Example 6:
+
+I want to create a nginx container where i want to give 256MB RAM, 1 cpus
+
+
+docker container run --cpus 0.5 --memory 256M --name limits -d nginx
+docker stats
+
+## Resources in Kubernetes
+
+Refer - https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+
+
+Requests(min/soft) and limits(max/hard)
+
+Requests - min memory-128MiB/M/Mi   CPU- 0.5---> soft limits
+
+1 VCPU --> 1000m cpu---> 500m(half cpu)---> 0.5 cpu---> 100m(1/10th of the cpu)
+
+2 VCPU ---> 2000m cpu
+
+
+limits :--> Hard limits
+
+limits: max memory-512Mi CPU: 1
+
+Resources types:
+---------------
+CPU
+Memory
+Huge pages --> more memory u need to provide to the Pod
+
+
+
+If the resources limits are already set and if the running Pod needs more and more memory , then the pod might get failed and u will get POD status OMMKIllED
+
+POD need more and more CPU then the resources limits, in that case POD will not be failed, but POD will go to threshold where the response/latency will be too high 
+
+
+A Pod with resources limits has an impact on QOS (Quality of Service)
+
+
+Refer - https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/
+
+Refer - https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/
+
+
+7 AM IST
+--------------
+Next --> Labels , Introduction to Pod , Pod states, Namespaces

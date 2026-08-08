@@ -1,0 +1,26 @@
+Kubernetes Day-47 ( 07-07-2026 09:41 PM IST )
+------------------------------------------------
+
+
+kubectl get pod test -o yaml
+
+Steps for connecting to kubernetes clusing using token
+----------------------------------------------------------
+1. token=$(cat token)
+2. echo $token
+3. API server url ---> kubectl cluster-info ( https://b7764cb9-6e9e-4829-941a-58d010d34b08.ap-west-2-gw.linodelke.net:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy )
+
+4. curl -k -H "Authorization Bearer $token" https://b7764cb9-6e9e-4829-941a-58d010d34b08.ap-west-2-gw.linodelke.net:443/api/v1
+
+https://172.30.1.2:6443/api/v1
+
+curl -k -H "Authorization Bearer $token" https://172.30.1.2:6443/api/v1
+
+Next session:-----
+
+emptydir volume
+configMap volume
+configRef - using environment variables
+downwardAPI
+secret volume
+hostPath ---

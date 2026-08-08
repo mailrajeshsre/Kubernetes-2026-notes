@@ -1,0 +1,160 @@
+Kubernetes Day-38 ( 31-05-2026 12:37 PM IST )
+--------------------------------------------------
+
+Nginx Ingress controller --> Nginx -F5
+kong
+Traefik
+
+Kubernetes --> support the all 3rd party controller integration 
+
+Kubernertes - CNCF ---> Ingress controller Nginx ---> no longer supported , march 2026, no new release is going to happen , they also mention to migrate to Gateway API service
+
+--------------------------------------------
+How to access the applications in k8s from outside cluster:
+-----------------------
+1. hostPort
+     binding the host port with the container port in that specific worker-node
+	 Port forwarding - Docker
+
+2. hostNetwork:
+
+3. NodePort:
+
+4. LoadBalancer: -> Layer 4 , TCP / UDP ( NLB )
+
+5. Ingress Controller
+
+Introduction to Ingress controller:
+------------------------------------------
+1. Ingress controller implements Layer7 LoadBalancing ( HTTP/HTTPS or Applications) in k8s cluster to access the application from outside
+
+2. Service type: LoadBalancer ---> Provided layer 4 as per OSI Reference model
+
+3. LoadBalancer types: Software , Hardware and Cloud
+
+4. Layer 7 LB - Nginx Ingress controller - features:
+   1. host based routing - www.rajeshdevops.com
+                           movies.rajeshdevops.com #FQDN
+						   songs.rajeshdevops.com
+						   contactus.rajeshdevops.com
+						   home.rajeshdevops.com
+   2. Path Based routing:
+                    www.rajeshdevops.com/login(URI)
+					www.rajeshdevops.com/payment (URI)
+					
+   3. TLS/SSL Termination
+         http-> https
+		 https -> certificate
+		 
+5. Ingress controller is deployed on kubernetes cluster of different platform like on-premises , or cloud 
+
+6. Ingress controller is an application that runs on the cluster to implement http loadbalancing
+
+7. On premises setup, we use Nginx Ingress controller which is the choice as per suggestion made by kubernetes in order to get the stability and further development
+
+8. Other 3rd party controller can be used:
+1. HA Proxy Ingress
+2. Traefik
+3. kong
+4. Istio Ingress
+
+refer to the document - https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+
+
+Cloud Platform:
+-----------------
+
+AWS ( ALB)
+Azure ( Application Gateway)
+GCP - Internal/External HTTPS LB
+
+Kuberners Cluster :
+---------------------
+1. Nginx Ingress Controller -> we need to deploy  , Manifest, Helm
+     deployment ---> Replicaset ---> Pod --> 1 Pod - Nginx ingress controller
+
+To implement the ingress resources in on-premises kubernetes cluster, we need to deploy the Nginx Ingres controller
+
+Kubernetes --> has the ingress object or resources, we need to have the ingress resource where we are deriving the ingress rules.
+yaml file for implementing the ingress resources
+
+2. Nginx Ingress controller supports default protocols like HTTP,TCP, UDP, WebSocket, grpcRoute
+
+3. Nginx ingress controller also supports VirtualServer and VirtualServerRoute feature as well 
+
+Nginx  ---> configuration , Virtual sites 
+
+4. After Nginx Ingress controller is installed , it comes up with 2 components:
+  1. IC process --> main process, configures the Nginx for ingress and other resources created in the cluster
+  2. Nginx Master process --> which controls the nginx worker process
+  3. Nginx work processes --> which handles the client traffic and Load Balance the traffic to the backend applications.
+  
+-----------------------------
+Deploy the Nginx Ingress Controller
+
+1. 1st method -> follow the official Nginx Ingress controller to install the controller.
+
+2. 2nd method --> this is easier method and you can go ahead and execute 1 yaml file 
+
+https://github.com/nginx/kubernetes-ingress/tree/v5.5.0
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+  
+  
+Lab -exercises:
+-----------------------------
+1. Akamai Cloud - Kubernetes cluster
+2. 1st worker node --> .kube/config --> kubectl command 
+
+3. Nginx Ingress controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+4. 2 deployments ( app1.yaml , app2.yaml)
+
+5. 2 service ( app1-svc.yaml, app2-svc.yaml) - type - ClusterIP
+
+6. Ingress resource file ( ingress.yaml ---> Rules )
+
+7.  haseebops.com ----> Namecheap.com
+
+U can purchase the Domain from any domain provider
+   1. godaddy.com
+   2. Hostlinger.com
+   3. Namecheap.com ---> haseebops.com/.net/.org
+   
+   rajesh-devops.xyz, or rajesh-devops.abc or rajesh-devops.123
+   
+8. You need to create the DNS entry ---> AWS account --> Route53 ---> create the hosted zone ---> create the record --> DNS A records
+
+<h1>Welcome to <font color=green> app1-Pod1</font></h1>
+
+<h1>Welcome to <font color=green> app1-Pod2</font></h1>
+
+<h1>Welcome to <font color=blue> app2-Pod1</font></h1>
+
+<h1>Welcome to <font color=blue> app2-Pod2</font></h1>
+
+ns-144.awsdns-18.com
+ns-1586.awsdns-06.co.uk
+ns-1391.awsdns-45.org
+ns-606.awsdns-11.net
+
+http://app2.haseebops.com/
+
+Next session:
+-------------------
+Path based routing
+TLS/SSL Termination 
+
+Gateway API - 2 sessions 
+
+Traefik Ingress controller
+
+   
+
+    
+
+
+

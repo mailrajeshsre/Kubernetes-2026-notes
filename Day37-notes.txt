@@ -1,0 +1,10 @@
+Kubernetes Day-37 ( 27-05-2026 10:06AM IST)
+---------------------------------------------------
+Introduction to Ingress Controller
+------------------------------------
+
+LoadBalancer -> On-premises (MetalLB) , Cloud (Akamai Cloud) --> k8s-cluster --> LoadBalancer
+
+LoadBalancer ---> When the client from outside the cluster want to access the application which is running in the k8s cluster .
+
+LoadBalancer ---> OSI Layer -4 (NLB)

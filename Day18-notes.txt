@@ -1,0 +1,19 @@
+Kubernetes Day-18 ( 16-04-2026 , 08:28 AM IST )
+--------------------------------------------------------
+
+ResourceQuota
+----------------------
+Namespaces --> Dev, QA, Test, Prod
+
+ResourceQuota always works with namespaces
+
+Configuratio file - config.yaml ---> /var/lib/kubelet/
+maxPod: 1000
+
+systemctl restart kubelet
+
+Next session:
+
+Resourcequota , limitrange - 45 mins 
+
+kubeconfig file 

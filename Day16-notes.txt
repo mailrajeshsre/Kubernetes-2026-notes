@@ -1,0 +1,50 @@
+Kubernetes Day-16 ( 12-04-2026 , 09:36 AM IST )
+-----------------------------------------------------------
+
+Kubernetes Namespaces:
+--------------------------------
+
+Namespace- Isolation 
+
+Every Resource in Kubernetes will get unique identity
+
+1. In order to organize the application deployment and managment on K8s , we use the namespaces
+
+2. We need to segregate the application security on k8s which should not effect other application on the cluster
+
+3. By Default after installation , k8s provide namespaces like default, kube-system, kube-public, weave-apiserver, calico-apiserver , kube-node-lease etc 
+
+kubectl get pods -n kube-system
+
+4. Applications under monitoring will be managed under "monitor" ns, database applications under "db" ns 
+
+5. Namespace will help the different teams to manage the authentication on the cluster by adding neccesary security with help of RBAC ( Authorization).
+
+
+6. Network policy will help to implement firewals between the applications (PODS) bases on namespaces
+
+7. Namespaces can be created either through Declarative or Imperative approach
+
+Declarative --> YAML
+Imperative --> command
+
+kubectl create namespaces dev ---> dev 
+
+kubectl create ns prod ---> prod ns
+
+8. Manage the resource consumption for differnet applications on the cluster by adding resourcequota in namespace level
+
+9. It also increase the performance of the api-server to handle the search for objects in the cluster through namespaces
+
+10. On kubernetes cluster, we gave few objects in the cluster level ( node, PV, etc ) , and other namespace level ( workloads, secrets, ConfigMap) -name space level
+
+
+kubectl apply -f ns-2.yaml -n dev
+
+
+
+Next day session:
+-------------------
+continue with namespace
+ResourceQuota
+LimitRanges

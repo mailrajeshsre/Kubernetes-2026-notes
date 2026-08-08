@@ -1,0 +1,74 @@
+Kubernetes Day-14 ( 07-04-2026 , 08:28 AM IST )
+--------------------------------------------------
+
+Multi containers in Pod , events & logs
+
+---------------------------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container
+  labels:
+    app: nginx
+    type: webserver
+spec:
+  containers:
+    - name: container-write
+      image: alpine
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do date >> /var/log/index.html; sleep 5;done"]
+      volumeMounts:
+        - name: shared-volume
+          mountPath: /var/log
+
+    - name: container-read
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: shared-volume
+          mountPath: /usr/share/nginx/html
+
+  volumes:
+    - name: shared-volume
+      emptyDir: {}
+--------------------------------------------------------------------
+
+Refer - https://kubernetes.io/docs/tasks/access-application-cluster/communicate-containers-same-pod-shared-volume/
+
+
+events:
+---------------------
+API-server , scheudler , etcd, kubelet, kube-proxy
+
+kubectl get events ---> it gets all events from that namespace
+
+if u want to increase the time period of events , then you need to edit the file
+
+/etc/kubernetes/manifests/kube-apiserver.yaml
+
+- --event-ttl=24h0m0s
+
+events
+
+it will show the list of events like 
+
+pod creation/deletion
+
+Scheduling issues
+
+Image pull errors
+
+Failed probes
+
+crash loops etc 
+
+kubectl get events --field-selector --> filer the data
+
+Next session :
+
+kubectl events --field-selector
+kubectl logs
+
+kubernetes namespaces

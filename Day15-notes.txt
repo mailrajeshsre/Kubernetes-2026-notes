@@ -1,0 +1,27 @@
+Kubernetes Day-15 ( 10-04-2026 08:32 AM IST )
+------------------------------------------------------
+events & logs
+namespaces
+ResourceQuota
+
+/etc/kubernetes/manifest
+vi kube-apiserver.yaml
+
+- --event-ttl=24h0m0s
+
+events:
+----------------------
+it will show the list of events like 
+
+pod creation/deletion
+Scheduling issues
+Image pull errors
+Failed probes
+crash loops etc 
+
+Next session -
+Morning 9AM IST
+--------------------------
+namespace
+
+resourcequota

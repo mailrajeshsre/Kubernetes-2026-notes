@@ -1,0 +1,78 @@
+Kubernetes Day-51 ( 18-07-2026 08:40 AM IST)
+-------------------------------------------------------
+
+Projected volumes
+Peristent volumes
+  1. local volume - hostpath volume
+  2. Network volume
+
+Pod ---> projected volume
+
+Kubernetes projected volume will allow to combine multiple volumes sources like ConfigMap , Secret, DownwardAPI and ServiceAccountToken into a single mount point inside the pod
+
+1. Create the ConfigMap
+
+kubectl create configmap my-config --from-literal=app-mode=debug
+
+2. Create the Secret:
+
+kubectl create secret generic my-secret --from-literal=password="admin123"
+
+3. Create a Pod using a projected volume (.yaml)
+
+hostpath volume:
+-----------------------------------
+hostpath volume is a volume type in kubernetes that links to a specfic directory from the node's local file system to a container inside a pod.
+
+hostpath is similar to docker "bind mount".
+
+/data ---> 
+
+
+volumes:
+  - name: host-storage
+    hostPath:
+	  path: /data
+	  type: Directory
+	
+Difference between emptyDir Vs hostpath difference
+-----------------------------------------------------------
+emptyDir ---> volume--> location ---> /var/lib/kubelet/Pods/PodUid/volumes
+
+hostpath --> /data ---. any directory on the node ,/var/tmp/
+
+Data lifespan: 
+emptyDir --> Deleted when the pod is deleted
+hostpath: remains until you deleted it manually
+
+
+Creation:
+emptyDir --> auto created when pod is created
+hostpath--->  it should exist on the node,before the pod is getting created
+
+
+Portability:
+emtpyDir --> not node specificc
+hostpath - node specific
+
+Peristent volume --> local --> hostpath
+-------------------------------------------
+
+1. mkdir -p /data
+2. echo "Welcome to hostpath volume" | tee /data/hostfile.txt
+
+3. write the hostpath yaml file example
+
+
+Next session - contine with host-path , use case , host-path - deployment
+
+network persitent volume -> NFS 
+
+host
+
+
+
+
+
+
+

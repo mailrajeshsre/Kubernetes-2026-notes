@@ -1,0 +1,24 @@
+Kubernetes Day-19 (18-04-2026, 08:41 AM IST )
+---------------------------------------------------------
+
+ResourceQuota - Namespaces
+
+limitrange -->
+
+Pods , container, volumes 
+
+Nodes --> 3 Pods---> in each 1 single i want only 2 containers
+containers --> CPU , Memory
+
+Nodes --> Pods (containers) , volumes
+
+lifecycle hooks:
+-------------------------------
+postStart--> this will get executed after pod creation
+preStop ---> deleting the pod, preStop will make the pod in successfull grace deletion
+
+stopSignal
+
+Next session: 5PM  ---> kubeadm tokens, kubeadm reset, kube config file 
+
+Controllers

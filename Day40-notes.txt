@@ -1,0 +1,141 @@
+Kubernetes Day-40 ( 04-06-2026 , 09:24 AM IST )
+------------------------------------------------
+Ingress Controller supports:
+--------------------------------------
+Host based routing
+
+Path based routing
+
+
+Nginx Ingress controller
+Traefik
+Kong
+HA-Proxy
+Isitio Ingress controller
+
+Whenever we are deploying the Ingress controller , it will be under the class , Nginx class
+
+Traefik , Class - Traefik
+
+pathType: Prefix/ Exact
+
+
+www.google.com/gmail--> gmail web page
+
+pathType: Prefix
+www.google.com/gmail/123/xyz--->gmail web page
+
+www.google.com/gmail--> gmail web page
+
+www.google.com/gmail/xyz---> it will not load
+
+www.google.com
+
+www.google.com/---> 404 client error
+
+www.google.com/gmail/
+
+pathType is mandatory and support 2 types:
+1. Exact
+2. Prefix
+
+suppose if the path is wrong or the path doesn't exist, then the default backend is configured in ingress controller to service and any request that do not match a path in the spec , typically we have 404 pages.
+
+app1.haseebops.com
+
+www.amazon.com
+
+cart.amazon.com
+
+login.amazon.com
+
+payment.amazon.com
+
+app1.haseebops.com/mail
+
+pathType: Prefix
+          Exact
+		  
+		  www.facebook.com/signup/---> 404 not found
+		  
+http://www.haseebops.com/login
+
+http://app1.haseebops.com -> Tested
+
+https
+
+Generate the certificate SSL/TLS Termination
+
+www.app1.haseebops.com---> https://www.app1.haseebops.com ---> ssl/tls termination
+
+http://app1.haseebops.com ---> https://www.app1.haseebops.com
+
+Certificates are required ---> key , CSR ----> CRT
+key , crt files ---> cerfiticates
+
+CSR Certificate --> self signing --> it is not authorized --> we cannot use self signed in the production , it can be used only for testing purpose
+
+digicert
+godaddy ---> 400 Rs / per year
+Namecheap
+Hostlinger
+AWS
+Azure
+GCP
+-----Authorized certificate / Valid certificate --> production env
+
+openssl command ---> create csr certificates
+
+SSL/TLS certifications:
+-------------------------------
+How TLS(HTTPS) termination works on Ingress ( SSL offload at Layer 7 )
+
+How to generate self signed certificated and store them as kubernetes TLS secrets
+
+How to configure HTTPS host based routing using ingress resource
+
+app1.haseebops.com
+
+app2.haseebops.com
+
+
+You need to verify the browser warning ( ssc/hostname is mismatch )
+
+openssl
+
+mkdir tls
+cd tls
+openssl
+
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout app1.key -out app1.crt -subj "/CN=app1.haseeops.com/o=app1.haseebops.com -addext "subjectAltName = DNS:app1.haseebops.com"
+
+-x509 ==> create a self signed cerfication
+
+- nodes --> private key without passphrase
+
+- days --> 365 --> valid for 1 year
+
+- rsa:2048 ---> secure key size
+
+- SAN ( SubjectAltName ) - must exactly match the hostname 
+
+
+root@lke612900-898831-01b5b0270000:~/tls# openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+> -keyout app1.key \
+> -out app1.crt \
+> -subj "/CN=app1.haseebops.com/o=app1.haseebops.com" \
+> -addext "subjectAltName = DNS:app1.haseebops.com"
+
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout app2.key -out a
+pp2.crt -subj "/CN=app2.haseebops.com/o=app2.haseebops.com" -addext "subjectAltName = DNS:app2.haseebops.com"
+
+echo "<h1> Welcome to APP1 - <font color=green> APP1-domain</font></h1>" > index.html
+
+echo "<h1> Welcome to APP2 - <font color=blue> APP2-domain</font></h1>" > index.html
+
+
+Next session - Trafiek ingress controller , Gateway API 
+
+

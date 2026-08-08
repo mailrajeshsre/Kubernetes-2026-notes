@@ -1,0 +1,55 @@
+Kubernetes Day-35 ( 22-05-2026 10:03 AM IST )
+-----------------------------------------------------------
+
+AWS --> EKS ---> Elastic Kubernetes Service
+
+Azure --> AKS ---> Azure Kubernetes Service
+
+Google Cloud --> GKE--> Google Kubernetes Engine
+
+Akamai Cloud ---> Kubernetes --->100$ Credit --> 3 months
+
+ExternalIP
+
+ExternalName
+
+---------------------------------------------
+Introduction to ExternalIP:
+-------------------------------
+
+1. ExternalIP service type helps to configure public-ip/private-ip address to access the application in the cluster
+
+2. In a simple way , to expose service to externalIP that route to one ore more nodes in the cluster
+
+3. ExternalIP is not controlled by Kubernetes and should be managed only by Cluster Adminstrator
+
+4. Ingress Traffic to ExternalIP with the serviceport will be routed to Service endpoints.
+
+
+External client --> ExternalIP----> ClusterIp---> endpoints
+----------------------------------------------------------------------------
+
+ExternalName:
+
+In my company -- All application - Frontend + Backend --> migrated to AWS cloud
+
+Databases ---> on-premises
+
+Introduction to ExternalName:
+--------------------------------------------------
+1. ExternalName is the service type which helps to configure the CNAME for service DNS
+
+2. We need to pass only DNS name of the resource to access externally , not the IP address ( DNS A Record)
+
+3. In order to use ExternalName Service type,we need to have either CoreDNS or Kube-DNS enabled in kubernetes cluster
+
+For example
+-----------
+1. If service DNS name is nginx-svc.default.svc.cluster.local which is th front application want to communicate to On-Premises Database backend. The application name will be db-server.rajeshdevops.com
+
+In order to redirect the domains with other domains we need to setup CNAME record --> CNAME: -- Canonical Name --> redirecting
+
+Next session:
+---------------------
+1. headless service
+2. Ingress Load Balancer
