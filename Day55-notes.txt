@@ -1,0 +1,107 @@
+Kubernetes Day-55 ( 09-08-2026 04:38 PM IST )
+-----------------------------------------------
+
+Persitent Storage
+
+Persistent Volume (PV) : PV is the logical storage resource such as AWS EBS Volume, Azure Disk, or NFS Share , Local disk , or HostPath .
+
+    2 types of PV provising:
+	------------------
+	1. Static PV - Kubernetes Admin or Storage Admin he will create the PV
+	2. Dynamic PV --> Dynamic PV or PVC are created dynaically with the help of StorageClass
+
+Binding
+Recliam Policy 
+Access Modes
+
+Refer - https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+PVC - PVC is a request made by the user/developer for storage made by the Pod or the application
+
+
+Dynamic PV's are created with the help of StorageClass (SC) 
+
+
+Large K8s Cluster -- > 20 Projects
+
+Each project ---> Storage --> PV, PVC---> Storage Admin , Kubernetes Admin --> PV--> miss to create PV's ---> PVC --
+
+Production  ---> Dynamically PV, PVCs--> Dynamic Provisioning  ---> prodution envrionment
+
+PVC --> is a piece of storage in the kubernetes cluster that has been provisioned by an adminstraotr (Static) or Dynaically created by Kubernetes (StorageClass) .
+
+Dynamic PVC ---> statefullset--> VolumeTemplateClaim 
+
+
+In Order to provide Volume as Object, which is controlleed through API by Admininstrator ---> PV, PVC
+
+
+Persistent Volume lifecycle is indepedent to the POD workload utilized by it.
+
+
+Even after deleteing the Workloads( PODS, Deployment) volume object should exists (PV,PVC)
+
+
+Persistent volume will be provisioned by Adminstator statically or dynamically by StorageClass
+
+Volume Plugins that are supported by volumes in PV are
+  1. hostPath , nfs, local , ISCSI etc
+
+
+PersistentVolumeClaims is a request from Workloads to cosume PersistentVolume
+
+
+
+We can also create Dynmaic PVC under Statefullset object by VolumeClaimTemplates
+
+
+PVC request for specific storage size and access modes ( RWO,RWX, ROX,RWOP)
+
+
+PV and PVC binding is one to one mapping ( Bidirectional)
+
+
+One PVC can be attached or mounted to multiple containers inside the pods or even with Pods(
+
+Kubernetes cluster -> Kube controller Manager(Master) + Worker node (Kubelet)---> managed the Access Modes
+
+
+Storage Object Protection will ensure that PVC and PV will not be deleted if you have enabled the protection .
+
+Persitent Volumes it supports 2 modes :
+1. Filesystem(Default)
+2. Block (RAW Storage)
+
+PV is a cluster level and PVC is namespace level object
+
+----------------------------------------
+
+Volume Plugins(drivers) for Peristent Volumes:
+========================================
+
+
+Volume Plugins is the component that tells kubernetes how to connect, mount, umounted and manage any specific type of storage for Persistent volume
+
+Next session:
+-----------
+
+4 Access modes
+
+Recliam Policies , Binding
+
+PV and PVC ---> YAML
+
+2 to 3 sessions --> Persistent Volume
+
+Cronjob, Demonset, Statefullset, ConfigMap, Secrets
+
+Networking, Helm
+
+Monitoring
+
+Schedulers 
+
+
+
+
+
